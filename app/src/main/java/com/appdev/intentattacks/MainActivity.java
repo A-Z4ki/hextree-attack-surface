@@ -10,9 +10,13 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.navigation.NavigationView;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Supplier;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
+    private Map<Integer, Supplier<Fragment>> fragmentMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,38 +35,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        // Initialize the fragment map
+        fragmentMap = new HashMap<>();
+        fragmentMap.put(R.id.nav_home, MainFragment::new);
+        fragmentMap.put(R.id.nav_flag1, Flag1Fragment::new);
+        fragmentMap.put(R.id.nav_flag2, Flag2Fragment::new);
+        fragmentMap.put(R.id.nav_flag3, Flag3Fragment::new);
+        fragmentMap.put(R.id.nav_flag4, Flag4Fragment::new);
+        fragmentMap.put(R.id.nav_flag5, Flag5Fragment::new);
+        fragmentMap.put(R.id.nav_flag6, Flag6Fragment::new);
+        fragmentMap.put(R.id.nav_flag7, Flag7Fragment::new);
+        fragmentMap.put(R.id.nav_flag8, Flag8Fragment::new);
+        fragmentMap.put(R.id.nav_flag9, Flag9Fragment::new);
+        fragmentMap.put(R.id.nav_flag10, Flag10Fragment::new);
+
         // Show MainFragment by default
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, new MainFragment())
                 .commit();
-            // Optionally set the checked item if you add a Home entry
-            // navigationView.setCheckedItem(R.id.nav_home);
         }
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Fragment fragment = null;
-        int id = item.getItemId();
-        if (id == R.id.nav_flag1) {
-            fragment = new Flag1Fragment();
-        } else if (id == R.id.nav_flag2) {
-            fragment = new Flag2Fragment();
-        } else if (id == R.id.nav_flag3) {
-            fragment = new Flag3Fragment();
-        } else if (id == R.id.nav_flag4) {
-            fragment = new Flag4Fragment();
-        } else if (id == R.id.nav_flag5) {
-            fragment = new Flag5Fragment();
-        } else if (id == R.id.nav_flag6) {
-            fragment = new Flag6Fragment();
-        } else if (id == R.id.nav_flag7) {
-            fragment = new Flag7Fragment();
-        } else if (id == R.id.nav_home) {
-            fragment = new MainFragment();
-        }
-        if (fragment != null) {
+        Supplier<Fragment> fragmentSupplier = fragmentMap.get(item.getItemId());
+        if (fragmentSupplier != null) {
+            Fragment fragment = fragmentSupplier.get();
             getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .commit();
