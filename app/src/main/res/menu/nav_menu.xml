@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_flag1"
+            android:title="Flag 1" />
+        <item
+            android:id="@+id/nav_flag2"
+            android:title="Flag 2" />
+        <item
+            android:id="@+id/nav_flag3"
+            android:title="Flag 3" />
+        <item
+            android:id="@+id/nav_flag4"
+            android:title="Flag 4" />
+        <item
+            android:id="@+id/nav_flag5"
+            android:title="Flag 5" />
+        <item
+            android:id="@+id/nav_flag6"
+            android:title="Flag 6" />
+        <item
+            android:id="@+id/nav_flag7"
+            android:title="Flag 7" />
+    </group>
+</menu> 
