@@ -22,6 +22,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<!--        <activity android:name=".Flag10Activity" android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="io.hextree.attacksurface.ATTACK_ME" />-->
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
+<!--        <activity android:name=".Flag11Activity" android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="io.hextree.attacksurface.ATTACK_ME" />-->
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
+        <activity android:name=".Flag12Activity" android:exported="true">
+            <intent-filter>
+                <action android:name="io.hextree.attacksurface.ATTACK_ME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Flag23Activity" android:exported="true">
+            <intent-filter>
+                <action android:name="io.hextree.attacksurface.MUTATE_ME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

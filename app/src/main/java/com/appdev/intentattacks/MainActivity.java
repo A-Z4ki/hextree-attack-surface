@@ -46,8 +46,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentMap.put(R.id.nav_flag6, Flag6Fragment::new);
         fragmentMap.put(R.id.nav_flag7, Flag7Fragment::new);
         fragmentMap.put(R.id.nav_flag8, Flag8Fragment::new);
-        fragmentMap.put(R.id.nav_flag9, Flag9Fragment::new);
-        fragmentMap.put(R.id.nav_flag10, Flag10Fragment::new);
+        fragmentMap.put(R.id.nav_flag9, Flag22Fragment::new);
+        fragmentMap.put(R.id.nav_flag22, Flag22Fragment::new);
 
         // Show MainFragment by default
         if (savedInstanceState == null) {
@@ -59,6 +59,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.nav_flag10) {
+            startActivity(new android.content.Intent(this, Flag10Activity.class));
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+        }
+        if (item.getItemId() == R.id.nav_flag11) {
+            startActivity(new android.content.Intent(this, Flag11Activity.class));
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+        }
+        if (item.getItemId() == R.id.nav_flag12) {
+            startActivity(new android.content.Intent(this, Flag12Activity.class));
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+        }
+        if (item.getItemId() == R.id.nav_flag23) {
+            startActivity(new android.content.Intent(this, Flag23Activity.class));
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+        }
         Supplier<Fragment> fragmentSupplier = fragmentMap.get(item.getItemId());
         if (fragmentSupplier != null) {
             Fragment fragment = fragmentSupplier.get();
