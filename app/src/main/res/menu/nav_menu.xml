@@ -41,10 +41,19 @@
             android:id="@+id/nav_flag12"
             android:title="Flag 12" />
         <item
+            android:id="@+id/nav_flag13"
+            android:title="Flag 13" />
+        <item
+            android:id="@+id/nav_flag14"
+            android:title="Flag 14" />
+        <item
+            android:id="@+id/nav_flag15"
+            android:title="Flag 15" />
+        <item
             android:id="@+id/nav_flag22"
             android:title="Flag 22" />
         <item
             android:id="@+id/nav_flag23"
             android:title="Flag 23" />
     </group>
-</menu> 
+</menu>

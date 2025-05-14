@@ -40,6 +40,14 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".Flag14Activity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="token" android:scheme="hex"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".Flag23Activity" android:exported="true">
             <intent-filter>
                 <action android:name="io.hextree.attacksurface.MUTATE_ME" />

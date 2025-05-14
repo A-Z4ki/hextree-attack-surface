@@ -48,6 +48,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentMap.put(R.id.nav_flag8, Flag8Fragment::new);
         fragmentMap.put(R.id.nav_flag9, Flag22Fragment::new);
         fragmentMap.put(R.id.nav_flag22, Flag22Fragment::new);
+        fragmentMap.put(R.id.nav_flag13, Flag13Fragment::new);
+        // fragmentMap.put(R.id.nav_flag14, Flag14Fragment::new);
+        fragmentMap.put(R.id.nav_flag15, Flag15Fragment::new);
 
         // Show MainFragment by default
         if (savedInstanceState == null) {
@@ -71,6 +74,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         if (item.getItemId() == R.id.nav_flag12) {
             startActivity(new android.content.Intent(this, Flag12Activity.class));
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+        }
+        if (item.getItemId() == R.id.nav_flag14) {
+            startActivity(new android.content.Intent(this, Flag14Activity.class));
             drawer.closeDrawer(GravityCompat.START);
             return true;
         }
