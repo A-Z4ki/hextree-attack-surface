@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Primary Colors -->
+    <color name="primary">#00FF41</color>  <!-- Matrix Green -->
+    <color name="primary_dark">#00CC33</color>
+    <color name="primary_light">#33FF66</color>
+    
+    <!-- Secondary Colors -->
+    <color name="secondary">#00BFFF</color>  <!-- Deep Sky Blue -->
+    <color name="secondary_dark">#0099CC</color>
+    <color name="secondary_light">#33CCFF</color>
+    
+    <!-- Background Colors -->
+    <color name="background_dark">#121212</color>  <!-- Dark Background -->
+    <color name="surface_dark">#1E1E1E</color>     <!-- Slightly Lighter Surface -->
+    <color name="card_background">#2D2D2D</color>  <!-- Card Background -->
+    
+    <!-- Text Colors -->
+    <color name="text_primary">#FFFFFF</color>     <!-- White -->
+    <color name="text_secondary">#B3FFFFFF</color> <!-- 70% White -->
+    <color name="text_hint">#80FFFFFF</color>      <!-- 50% White -->
+    
+    <!-- Accent Colors -->
+    <color name="accent_red">#FF1744</color>       <!-- Error/Alert Red -->
+    <color name="accent_yellow">#FFD600</color>    <!-- Warning Yellow -->
+    <color name="accent_green">#00E676</color>     <!-- Success Green -->
+    
+    <!-- System Colors -->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
 </resources>

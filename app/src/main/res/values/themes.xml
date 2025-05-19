@@ -1,9 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.IntentAttacks" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Theme.YourAppName" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary brand colors -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_dark</item>
+        <item name="colorOnPrimary">@color/black</item>
+        
+        <!-- Secondary brand colors -->
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorSecondaryVariant">@color/secondary_dark</item>
+        <item name="colorOnSecondary">@color/black</item>
+        
+        <!-- Status bar color -->
+        <item name="android:statusBarColor">@color/background_dark</item>
+        <item name="android:navigationBarColor">@color/background_dark</item>
+        
+        <!-- Background colors -->
+        <item name="android:windowBackground">@color/background_dark</item>
+        <item name="android:colorBackground">@color/background_dark</item>
+        <item name="colorSurface">@color/surface_dark</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorOnBackground">@color/text_primary</item>
+        
+        <!-- Text appearance -->
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+        <item name="android:textColorHint">@color/text_hint</item>
+        
+        <!-- Material Design attributes -->
+        <item name="materialCardViewStyle">@style/Widget.App.CardView</item>
+        <item name="buttonStyle">@style/Widget.App.Button</item>
+        <item name="textInputStyle">@style/Widget.App.TextInputLayout</item>
     </style>
 
-    <style name="Theme.IntentAttacks" parent="Base.Theme.IntentAttacks" />
+    <!-- Card style -->
+    <style name="Widget.App.CardView" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/card_background</item>
+        <item name="cardElevation">4dp</item>
+        <item name="cardCornerRadius">8dp</item>
+        <item name="contentPadding">16dp</item>
+    </style>
+
+    <!-- Button style -->
+    <style name="Widget.App.Button" parent="Widget.Material3.Button">
+        <item name="android:textColor">@color/black</item>
+        <item name="backgroundTint">@color/primary</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <!-- TextInputLayout style -->
+    <style name="Widget.App.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/primary</item>
+        <item name="hintTextColor">@color/primary</item>
+        <item name="android:textColorHint">@color/text_hint</item>
+    </style>
+
+    <style name="Theme.IntentAttacks" parent="Theme.YourAppName" />
 </resources>

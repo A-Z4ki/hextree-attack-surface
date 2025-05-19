@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Font families -->
+    <string name="font_family_primary">sans-serif-monospace</string>
+    <string name="font_family_secondary">sans-serif</string>
+
+    <!-- Text styles -->
+    <style name="TextAppearance.App.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="fontFamily">@string/font_family_primary</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:letterSpacing">0.01</item>
+    </style>
+
+    <style name="TextAppearance.App.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
+        <item name="fontFamily">@string/font_family_primary</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:letterSpacing">0.01</item>
+    </style>
+
+    <style name="TextAppearance.App.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="fontFamily">@string/font_family_primary</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:letterSpacing">0.01</item>
+    </style>
+
+    <style name="TextAppearance.App.Body1" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@string/font_family_secondary</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+    </style>
+
+    <style name="TextAppearance.App.Caption" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@string/font_family_secondary</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <style name="TextAppearance.App.Code" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@string/font_family_primary</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:background">@color/card_background</item>
+        <item name="android:padding">8dp</item>
+    </style>
+</resources> 

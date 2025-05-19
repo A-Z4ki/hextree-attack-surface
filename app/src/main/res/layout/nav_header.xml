@@ -3,23 +3,31 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="176dp"
-    android:background="?attr/colorPrimary"
+    android:background="@color/surface_dark"
     android:gravity="bottom"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    android:padding="24dp"
+    android:theme="@style/ThemeOverlay.MaterialComponents.Dark">
+
+    <View
+        android:layout_width="48dp"
+        android:layout_height="4dp"
+        android:background="@color/primary"
+        android:layout_marginBottom="24dp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="HexTree PoC"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textAppearance="@style/TextAppearance.App.Headline2"
+        android:textColor="@color/primary"
+        android:layout_marginBottom="8dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select a flag to exploit"/>
+        android:text="Select a flag to exploit"
+        android:textAppearance="@style/TextAppearance.App.Subtitle1"
+        android:textColor="@color/text_secondary"/>
 
 </LinearLayout> 

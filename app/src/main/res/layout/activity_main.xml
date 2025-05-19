@@ -6,7 +6,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/background_dark"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -14,25 +14,31 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-            <FrameLayout
+            android:layout_height="wrap_content"
+            android:background="@color/surface_dark"
+            android:elevation="4dp">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/surface_dark"
+                android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+                app:titleEnabled="false">
+
                 <TextView
                     android:id="@+id/toolbar_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="HexTree PoC App"
-                    android:textAppearance="@style/ToolbarTitle"
+                    android:textAppearance="@style/TextAppearance.App.Headline2"
                     android:layout_gravity="center"
                     android:gravity="center"/>
-            </FrameLayout>
-        </androidx.appcompat.widget.Toolbar>
+
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
 
         <FrameLayout
             android:id="@+id/fragment_container"
@@ -47,7 +53,10 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/white"
+        android:background="@color/surface_dark"
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark"
+        app:itemTextColor="@color/text_primary"
+        app:itemIconTint="@color/primary"
         app:menu="@menu/nav_menu"
         app:headerLayout="@layout/nav_header" />
 
