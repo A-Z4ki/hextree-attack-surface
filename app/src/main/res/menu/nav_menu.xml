@@ -50,6 +50,24 @@
             android:id="@+id/nav_flag15"
             android:title="Flag 15" />
         <item
+            android:id="@+id/nav_flag16"
+            android:title="Flag 16" />
+        <item
+            android:id="@+id/nav_flag17"
+            android:title="Flag 17" />
+        <item
+            android:id="@+id/nav_flag18"
+            android:title="Flag 18" />
+        <item
+            android:id="@+id/nav_flag19"
+            android:title="Flag 19" />
+        <item
+            android:id="@+id/nav_flag20"
+            android:title="Flag 20" />
+        <item
+            android:id="@+id/nav_flag21"
+            android:title="Flag 21" />
+        <item
             android:id="@+id/nav_flag22"
             android:title="Flag 22" />
         <item
