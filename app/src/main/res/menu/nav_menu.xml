@@ -73,5 +73,23 @@
         <item
             android:id="@+id/nav_flag23"
             android:title="Flag 23" />
+        <item
+            android:id="@+id/nav_flag24"
+            android:title="Flag 24" />
+        <item
+            android:id="@+id/nav_flag25"
+            android:title="Flag 25" />
+        <item
+            android:id="@+id/nav_flag26"
+            android:title="Flag 26" />
+        <item
+            android:id="@+id/nav_flag27"
+            android:title="Flag 27" />
+        <item
+            android:id="@+id/nav_flag28"
+            android:title="Flag 28" />
+        <item
+            android:id="@+id/nav_flag29"
+            android:title="Flag 29" />
     </group>
 </menu>

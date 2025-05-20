@@ -57,6 +57,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentMap.put(R.id.nav_flag20, Flag20Fragment::new);
         fragmentMap.put(R.id.nav_flag21, Flag21Fragment::new);
         fragmentMap.put(R.id.nav_flag22, Flag22Fragment::new);
+        fragmentMap.put(R.id.nav_flag24, Flag24Fragment::new);
+        fragmentMap.put(R.id.nav_flag25, Flag25Fragment::new);
+        fragmentMap.put(R.id.nav_flag26, Flag26Fragment::new);
+        fragmentMap.put(R.id.nav_flag27, Flag27Fragment::new);
+        fragmentMap.put(R.id.nav_flag28, Flag28Fragment::new);
+        fragmentMap.put(R.id.nav_flag29, Flag29Fragment::new);
 
         // Show MainFragment by default
         if (savedInstanceState == null) {

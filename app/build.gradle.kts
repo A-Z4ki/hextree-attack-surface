@@ -5,7 +5,6 @@ plugins {
 android {
     namespace = "com.appdev.intentattacks"
     compileSdk = 34
-
     defaultConfig {
         applicationId = "com.appdev.intentattacks"
         minSdk = 24
@@ -28,6 +27,9 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+    buildFeatures {
+        aidl = true
     }
 }
 
