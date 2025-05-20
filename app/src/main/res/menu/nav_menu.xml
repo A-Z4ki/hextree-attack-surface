@@ -91,5 +91,20 @@
         <item
             android:id="@+id/nav_flag29"
             android:title="Flag 29" />
+        <item
+            android:id="@+id/nav_flag30"
+            android:title="Flag 30" />
+        <item
+            android:id="@+id/nav_flag31"
+            android:title="Flag 31" />
+        <item
+            android:id="@+id/nav_flag32"
+            android:title="Flag 32" />
+        <item
+            android:id="@+id/nav_flag33_1"
+            android:title="Flag 33_1" />
+        <item
+            android:id="@+id/nav_flag33_2"
+            android:title="Flag 33_2" />
     </group>
 </menu>
