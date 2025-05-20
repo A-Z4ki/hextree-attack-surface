@@ -101,6 +101,16 @@ public class Flag29Fragment extends Fragment {
 
     // === BEGIN ===
     // === AIDL Binder methods ===
+
+    private void bindAidlService() {
+        Intent intent = new Intent();
+        intent.setComponent(new ComponentName(
+                "io.hextree.attacksurface",
+                "io.hextree.attacksurface.services.Flag29Service"
+        ));
+        requireContext().bindService(intent, aidlConnection, Context.BIND_AUTO_CREATE);
+    }
+
     private String callInit() throws RemoteException {
         Parcel in = Parcel.obtain();
         Parcel out = Parcel.obtain();
@@ -141,11 +151,21 @@ public class Flag29Fragment extends Fragment {
             in.recycle();
         }
     }
+
     // === END ===
     // === AIDL Binder methods ===
 
     // === BEGIN ===
     // === ClassLoader-based method ===
+    private void bindClassLoaderService() {
+        Intent intent = new Intent();
+        intent.setComponent(new ComponentName(
+                "io.hextree.attacksurface",
+                "io.hextree.attacksurface.services.Flag29Service"
+        ));
+        requireContext().bindService(intent, classLoaderConnection, Context.BIND_AUTO_CREATE);
+    }
+
     private void callViaClassLoader() throws Exception {
         ClassLoader classLoader = getForeignClassLoader(requireContext(), "io.hextree.attacksurface");
         Class<?> iface = classLoader.loadClass("io.hextree.attacksurface.services.IFlag29Interface");
@@ -174,27 +194,6 @@ public class Flag29Fragment extends Fragment {
 
         Toast.makeText(getContext(), "ClassLoader method succeeded", Toast.LENGTH_SHORT).show();
     }
-    // === END ===
-    // === ClassLoader-based method ===
-
-    // === Service Binding methods ===
-    private void bindAidlService() {
-        Intent intent = new Intent();
-        intent.setComponent(new ComponentName(
-                "io.hextree.attacksurface",
-                "io.hextree.attacksurface.services.Flag29Service"
-        ));
-        requireContext().bindService(intent, aidlConnection, Context.BIND_AUTO_CREATE);
-    }
-
-    private void bindClassLoaderService() {
-        Intent intent = new Intent();
-        intent.setComponent(new ComponentName(
-                "io.hextree.attacksurface",
-                "io.hextree.attacksurface.services.Flag29Service"
-        ));
-        requireContext().bindService(intent, classLoaderConnection, Context.BIND_AUTO_CREATE);
-    }
 
     private ClassLoader getForeignClassLoader(Context context, String packageName) throws Exception {
         Context foreignContext = context.createPackageContext(
@@ -203,6 +202,9 @@ public class Flag29Fragment extends Fragment {
         );
         return foreignContext.getClassLoader();
     }
+
+    // === END ===
+    // === ClassLoader-based method ===
 
     @Override
     public void onDestroyView() {
