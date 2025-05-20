@@ -106,5 +106,17 @@
         <item
             android:id="@+id/nav_flag33_2"
             android:title="Flag 33_2" />
+        <item
+            android:id="@+id/nav_flag34"
+            android:title="Flag 34" />
+        <item
+            android:id="@+id/nav_flag35"
+            android:title="Flag 35" />
+        <item
+            android:id="@+id/nav_flag36"
+            android:title="Flag 36" />
+        <item
+            android:id="@+id/nav_flag37"
+            android:title="Flag 37" />
     </group>
 </menu>
