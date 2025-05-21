@@ -127,5 +127,8 @@
         <item
             android:id="@+id/nav_flag40"
             android:title="Flag 40" />
+        <item
+            android:id="@+id/nav_flag41"
+            android:title="Flag 41" />
     </group>
 </menu>
